@@ -18,7 +18,20 @@
             theme: {
                 extend: {
                     fontFamily: { sans: ['Inter', 'sans-serif'], heading: ['Outfit', 'sans-serif'] },
-                    colors: { brand: { 50: '#fef2f2', 100: '#fee2e2', 500: '#ef4444', 600: '#dc2626', 900: '#7f1d1d' } },
+                    colors: { 
+                        brand: { 
+                            50: '#f0f9ff', 
+                            100: '#e0f2fe', 
+                            200: '#bae6fd', 
+                            300: '#7dd3fc', 
+                            400: '#38bdf8', 
+                            500: '#0ea5e9', 
+                            600: '#0284c7', 
+                            700: '#0369a1', 
+                            800: '#075985', 
+                            900: '#0c4a6e' 
+                        } 
+                    },
                     animation: { 'marquee': 'marquee 25s linear infinite' },
                     keyframes: { marquee: { '0%': { transform: 'translateX(0%)' }, '100%': { transform: 'translateX(-100%)' } } }
                 }
@@ -28,25 +41,38 @@
 
     <style>
         /* Ambient BG & Custom Utilities */
-        .ambient-bg { position: fixed; inset: 0; z-index: -1; background: #f8fafc; overflow: hidden; }
+        .ambient-bg { position: fixed; inset: 0; z-index: -2; background: #f8fafc; overflow: hidden; }
         .blob { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.4; animation: float 15s infinite alternate ease-in-out; }
-        .blob-1 { top: -10%; left: -10%; width: 50vw; height: 50vw; background: #fee2e2; }
-        .blob-2 { bottom: -10%; right: -10%; width: 40vw; height: 40vw; background: #e0f2fe; animation-direction: alternate-reverse; }
+        .blob-1 { top: -10%; left: -10%; width: 50vw; height: 50vw; background: #e0f2fe; }
+        .blob-2 { bottom: -10%; right: -10%; width: 40vw; height: 40vw; background: #dbeafe; animation-direction: alternate-reverse; }
         @keyframes float { to { transform: translate(10%, 10%) scale(1.1); } }
-        .glass-panel { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.8); }
+        .glass-panel { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(16px); }
         .hide-scrollbar::-webkit-scrollbar { display: none; }
         
-        /* Navbar Folding Transitions (FIXED FOR SMOOTH SCROLL) */
+        /* Navbar Folding Transitions */
         #main-nav { transition: max-width 0.7s cubic-bezier(0.4, 0, 0.2, 1), padding 0.7s ease; white-space: nowrap; overflow: hidden; max-width: 1400px; }
-        .nav-folded { max-width: 235px !important; padding-right: 24px !important; }
+        .nav-folded { max-width: 275px !important; padding-right: 24px !important; }
         .nav-hidden-items { opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+
+        /* Hero Background Slider Styles */
+        .hero-bg-slide { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0; transition: opacity 1s ease-in-out; }
+        .hero-bg-slide.active { opacity: 1; }
     </style>
 </head>
-<body class="font-sans text-slate-700 antialiased overflow-x-hidden pb-20">
+<body class="font-sans text-slate-700 antialiased overflow-x-hidden pb-20 relative">
 
     <div class="ambient-bg"><div class="blob blob-1"></div><div class="blob blob-2"></div></div>
 
-    <div id="quote-popup" class="fixed inset-0 z-[100] hidden items-center justify-center bg-slate-900/60 p-4 backdrop-blur-sm transition-opacity">
+    <div class="absolute top-0 left-0 w-full h-[115vh] lg:h-[100vh] z-[-1] overflow-hidden">
+        <div class="hero-bg-slide active" style="background-image: url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1920&q=80')"></div>
+        <div class="hero-bg-slide" style="background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1920&q=80')"></div>
+        <div class="hero-bg-slide" style="background-image: url('https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=1920&q=80')"></div>
+        <div class="hero-bg-slide" style="background-image: url('https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1920&q=80')"></div>
+        <div class="absolute inset-0 bg-brand-900/70 mix-blend-multiply"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-brand-900/80 to-transparent"></div>
+    </div>
+
+    <div id="quote-popup" class="fixed inset-0 z-[120] hidden items-center justify-center bg-slate-900/60 p-4 backdrop-blur-sm transition-opacity">
         <div class="relative w-full max-w-md max-h-[90vh] overflow-y-auto rounded-3xl bg-white p-8 shadow-2xl animate-[bounce_1s_ease-in-out]">
             <button onclick="closePopup()" class="absolute right-4 top-4 text-slate-400 hover:text-brand-600"><i class="fas fa-times text-xl"></i></button>
             <h3 class="mb-2 font-heading text-2xl font-bold text-slate-900">Get an Instant Quote</h3>
@@ -59,19 +85,23 @@
         </div>
     </div>
 
-    <div class="relative z-50 flex flex-wrap items-center justify-between bg-slate-900 px-6 py-2 text-xs font-medium text-slate-300 md:text-sm">
+    <div class="relative z-50 flex flex-wrap items-center justify-between bg-slate-900/80 backdrop-blur-md border-b border-white/10 px-6 py-2 text-xs font-medium text-slate-200 md:text-sm">
         <div class="flex items-center gap-4">
-            <a href="tel:+919876543210" class="hover:text-white"><i class="fas fa-phone-alt mr-1 text-brand-500"></i> +91 98765 43210</a>
-            <a href="mailto:admin@bookmytruck.com" class="hidden hover:text-white md:inline-block"><i class="fas fa-envelope mr-1 text-brand-500"></i> admin@bookmytruck.com</a>
+            <a href="tel:+919876543210" class="hover:text-white"><i class="fas fa-phone-alt mr-1 text-brand-400"></i> +91 98765 43210</a>
+            <a href="mailto:admin@bookmytruck.com" class="hidden hover:text-white md:inline-block"><i class="fas fa-envelope mr-1 text-brand-400"></i> admin@bookmytruck.com</a>
         </div>
         <div>
-            <i class="fas fa-map-marker-alt mr-1 text-brand-500"></i> Sayajigunj, Vadodara, Gujarat
+            <i class="fas fa-map-marker-alt mr-1 text-brand-400"></i> Sayajigunj, Vadodara, Gujarat
         </div>
     </div>
 
-    <nav id="main-nav" class="sticky top-2 z-40 ml-[2%] mt-2 flex w-[96%] items-center justify-between overflow-hidden rounded-full glass-panel px-6 py-3 shadow-sm md:ml-[5%] md:w-[90%]">
-        <div onclick="toggleNav()" class="font-heading text-2xl font-black tracking-tight text-slate-900 cursor-pointer transition hover:opacity-80" title="Click to expand menu">
-            BOOK MY<span class="text-brand-600">TRUCK</span>
+    <nav id="main-nav" class="sticky top-2 z-40 ml-[2%] mt-2 flex w-[96%] items-center justify-between overflow-hidden rounded-full glass-panel px-6 py-3 border border-brand-200 shadow-[0_0_20px_rgba(14,165,233,0.35)] md:ml-[5%] md:w-[90%]">
+        
+        <div onclick="toggleNav()" class="flex items-center gap-3 cursor-pointer transition hover:opacity-80" title="Click to open menu">
+            <div class="font-heading text-2xl font-black tracking-tight text-slate-900">
+                BOOK MY<span class="text-brand-600">TRUCK</span><span class="text-base lowercase font-bold text-slate-500 tracking-normal">.com</span>
+            </div>
+            <i class="fas fa-bars text-xl text-brand-600 md:hidden"></i>
         </div>
         
         <ul id="nav-links" class="hidden items-center gap-8 font-medium text-slate-800 transition-all duration-300 md:flex">
@@ -83,22 +113,37 @@
         <a id="nav-btn" href="#survey" class="hidden rounded-full bg-slate-900 px-6 py-2 font-heading font-bold text-white shadow-md transition hover:-translate-y-0.5 hover:bg-brand-600 md:block">Book Survey</a>
     </nav>
 
-    <header class="relative mx-auto flex min-h-[90vh] max-w-7xl flex-col items-center justify-between px-6 pb-16 pt-16 lg:flex-row">
+    <div id="mobile-overlay" onclick="toggleNav()" class="fixed inset-0 z-[105] bg-slate-900/60 backdrop-blur-sm hidden opacity-0 transition-opacity duration-300"></div>
+    
+    <div id="mobile-side-menu" class="fixed top-0 right-0 z-[110] h-full w-64 translate-x-full bg-white shadow-2xl transition-transform duration-300 flex flex-col">
+        <div class="p-6 flex justify-between items-center border-b border-slate-100">
+            <span class="font-heading font-black text-slate-900 text-xl">MENU</span>
+            <button onclick="toggleNav()" class="text-slate-400 hover:text-brand-600"><i class="fas fa-times text-2xl"></i></button>
+        </div>
+        <div class="flex flex-col p-6 gap-4 font-medium text-slate-700">
+            <a href="#story" onclick="toggleNav()" class="hover:text-brand-600 transition text-lg py-2 border-b border-slate-50">Our Story</a>
+            <a href="#services" onclick="toggleNav()" class="hover:text-brand-600 transition text-lg py-2 border-b border-slate-50">Services</a>
+            <a href="#tracking" onclick="toggleNav()" class="hover:text-brand-600 transition text-lg py-2 border-b border-slate-50">Tracking</a>
+            <a href="#faq" onclick="toggleNav()" class="hover:text-brand-600 transition text-lg py-2 border-b border-slate-50">FAQ</a>
+            <a href="#survey" onclick="toggleNav()" class="mt-4 rounded-xl bg-brand-600 py-3 text-center font-heading font-bold text-white shadow-md transition hover:bg-brand-500">Book Free Survey</a>
+        </div>
+    </div>
+
+    <header class="relative z-10 mx-auto flex w-full min-h-[85vh] max-w-7xl flex-col items-center justify-between px-6 pb-12 pt-12 lg:flex-row">
         <div class="w-full text-center lg:w-1/2 lg:text-left">
-            <div class="mb-6 inline-block rounded-full border border-brand-100 bg-brand-50 px-4 py-1.5 font-bold text-brand-600">
-                <i class="fas fa-shield-alt mr-2"></i> India's #1 Logistics Partner
+            <div class="mb-6 inline-block rounded-full border border-brand-300/30 bg-white/10 backdrop-blur-md px-4 py-1.5 font-bold text-white">
+                <i class="fas fa-shield-alt mr-2 text-brand-300"></i> India's #1 Logistics Partner
             </div>
-            <h1 class="mb-6 font-heading text-5xl font-black leading-tight tracking-tight text-slate-900 md:text-6xl lg:text-7xl">
-                Relocation, <br>engineered for <span class="text-brand-600">peace of mind.</span>
+            <h1 class="mb-6 font-heading text-5xl font-black leading-tight tracking-tight text-white md:text-6xl lg:text-7xl">
+                Relocation, <br>engineered for <span class="text-brand-300">peace of mind.</span>
             </h1>
-            <p class="mb-8 text-lg leading-relaxed text-slate-600 md:text-xl">
+            <p class="mb-8 text-lg leading-relaxed text-slate-200 md:text-xl">
                 Welcome to Book My Truck. From precision packing to flawless delivery across India, we handle your assets with uncompromising care.
             </p>
         </div>
-        <div class="relative mt-12 w-full lg:mt-0 lg:w-5/12">
-            <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1200&q=80" alt="Book My Truck Logistics" class="aspect-[4/5] w-full rounded-[2.5rem] object-cover shadow-2xl lg:rounded-[40px_120px_40px_120px]">
-            
-            <form class="relative mt-8 left-0 w-full rounded-3xl glass-panel p-6 shadow-xl lg:absolute lg:-bottom-10 lg:-left-12 lg:mt-0 lg:w-[100%]">
+        
+        <div class="relative mt-8 w-full lg:mt-0 lg:w-5/12">
+            <form class="w-full rounded-3xl glass-panel p-6 shadow-[0_20px_50px_rgba(0,0,0,0.3)] border border-white/30 backdrop-blur-xl">
                 <h3 class="mb-4 font-heading text-xl font-bold text-slate-900">Get an Instant Quote</h3>
                 <div class="space-y-3">
                     <input type="text" placeholder="Full Name" required class="w-full rounded-xl border border-slate-200 bg-white/80 px-4 py-3 outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500">
@@ -112,52 +157,54 @@
                     <button type="submit" class="w-full rounded-xl bg-brand-600 py-3.5 font-heading font-bold text-white shadow-lg transition hover:bg-brand-500">Calculate Cost</button>
                 </div>
             </form>
-
         </div>
     </header>
 
-    <div class="w-full overflow-hidden border-y border-slate-200 bg-white py-6 mt-12 lg:mt-0">
-        <div class="mx-auto mb-4 text-center text-sm font-bold tracking-widest text-slate-400 uppercase">Trusted By Industry Leaders</div>
+    <div class="w-full overflow-hidden border-y border-slate-200 bg-white py-4">
+        <div class="mx-auto mb-3 text-center text-sm font-bold tracking-widest text-slate-400 uppercase">Trusted By Industry Leaders</div>
         <div class="flex whitespace-nowrap">
-            <div class="animate-marquee flex gap-16 px-8 text-4xl text-slate-300">
-                <i class="fab fa-amazon hover:text-slate-800 transition"></i>
-                <i class="fab fa-google hover:text-slate-800 transition"></i>
-                <i class="fab fa-microsoft hover:text-slate-800 transition"></i>
-                <i class="fab fa-apple hover:text-slate-800 transition"></i>
-                <i class="fab fa-airbnb hover:text-slate-800 transition"></i>
-                <i class="fab fa-uber hover:text-slate-800 transition"></i>
-                <i class="fab fa-amazon hover:text-slate-800 transition"></i>
-                <i class="fab fa-google hover:text-slate-800 transition"></i>
-                <i class="fab fa-microsoft hover:text-slate-800 transition"></i>
+            <div class="animate-marquee flex items-center gap-16 px-8 text-5xl">
+                <i class="fab fa-amazon text-[#FF9900] transition hover:scale-110 cursor-pointer"></i>
+                <i class="fab fa-google text-[#4285F4] transition hover:scale-110 cursor-pointer"></i>
+                <i class="fab fa-microsoft text-[#00A4EF] transition hover:scale-110 cursor-pointer"></i>
+                <i class="fab fa-apple text-[#555555] transition hover:scale-110 cursor-pointer"></i>
+                <i class="fab fa-airbnb text-[#FF5A5F] transition hover:scale-110 cursor-pointer"></i>
+                <i class="fab fa-uber text-black transition hover:scale-110 cursor-pointer"></i>
+                <i class="fab fa-amazon text-[#FF9900] transition hover:scale-110 cursor-pointer"></i>
+                <i class="fab fa-google text-[#4285F4] transition hover:scale-110 cursor-pointer"></i>
+                <i class="fab fa-microsoft text-[#00A4EF] transition hover:scale-110 cursor-pointer"></i>
+                <i class="fab fa-apple text-[#555555] transition hover:scale-110 cursor-pointer"></i>
+                <i class="fab fa-airbnb text-[#FF5A5F] transition hover:scale-110 cursor-pointer"></i>
+                <i class="fab fa-uber text-black transition hover:scale-110 cursor-pointer"></i>
             </div>
         </div>
     </div>
 
-    <section class="relative z-10 mx-auto max-w-7xl px-6 py-16">
+    <section class="relative z-10 mx-auto max-w-7xl px-6 py-12">
         <div class="grid grid-cols-2 gap-4 md:grid-cols-4 lg:gap-8">
-            <div class="rounded-3xl glass-panel p-8 text-center shadow-sm">
+            <div class="rounded-3xl glass-panel p-8 text-center shadow-sm border border-slate-100">
                 <h3 class="font-heading text-4xl font-black text-brand-600"><span class="counter" data-target="15">0</span>+</h3>
                 <p class="mt-2 font-medium">Years Experience</p>
             </div>
-            <div class="rounded-3xl glass-panel p-8 text-center shadow-sm">
+            <div class="rounded-3xl glass-panel p-8 text-center shadow-sm border border-slate-100">
                 <h3 class="font-heading text-4xl font-black text-brand-600"><span class="counter" data-target="12500">0</span>+</h3>
                 <p class="mt-2 font-medium">Happy Families</p>
             </div>
-            <div class="rounded-3xl glass-panel p-8 text-center shadow-sm">
+            <div class="rounded-3xl glass-panel p-8 text-center shadow-sm border border-slate-100">
                 <h3 class="font-heading text-4xl font-black text-brand-600"><span class="counter" data-target="500">0</span>+</h3>
                 <p class="mt-2 font-medium">Cities Covered</p>
             </div>
-            <div class="rounded-3xl glass-panel p-8 text-center shadow-sm">
+            <div class="rounded-3xl glass-panel p-8 text-center shadow-sm border border-slate-100">
                 <h3 class="font-heading text-4xl font-black text-brand-600"><span class="counter" data-target="100">0</span>%</h3>
                 <p class="mt-2 font-medium">Safe Delivery</p>
             </div>
         </div>
     </section>
 
-    <section id="story" class="mx-auto max-w-7xl px-6 py-16">
-        <div class="grid items-center gap-12 lg:grid-cols-2">
-            <div class="rounded-3xl glass-panel p-8 md:p-12">
-                <h2 class="mb-6 font-heading text-3xl font-black leading-tight text-slate-900 md:text-4xl">
+    <section id="story" class="mx-auto max-w-7xl px-6 py-12">
+        <div class="grid items-center gap-10 lg:grid-cols-2">
+            <div class="rounded-3xl glass-panel p-8 md:p-12 border border-slate-100">
+                <h2 class="mb-5 font-heading text-3xl font-black leading-tight text-slate-900 md:text-4xl">
                     Our Story: 15+ Years of Excellence.
                 </h2>
                 <article class="prose prose-slate space-y-4 text-justify">
@@ -174,22 +221,22 @@
             </div>
             <div class="grid grid-cols-2 gap-4">
                 <div class="rounded-2xl bg-white p-6 shadow-md text-center">
-                    <div class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-blue-100 text-3xl text-blue-600 shadow-inner"><i class="fas fa-file-invoice"></i></div>
+                    <div class="mx-auto mb-3 flex h-16 w-16 items-center justify-center rounded-full bg-blue-100 text-3xl text-blue-600 shadow-inner"><i class="fas fa-file-invoice"></i></div>
                     <h4 class="font-bold text-slate-900">GST Registered</h4>
                     <p class="text-xs text-slate-500 mt-1">100% compliant billing</p>
                 </div>
                 <div class="rounded-2xl bg-white p-6 shadow-md text-center">
-                    <div class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-green-100 text-3xl text-green-600 shadow-inner"><i class="fas fa-shield-alt"></i></div>
+                    <div class="mx-auto mb-3 flex h-16 w-16 items-center justify-center rounded-full bg-green-100 text-3xl text-green-600 shadow-inner"><i class="fas fa-shield-alt"></i></div>
                     <h4 class="font-bold text-slate-900">100% Insured</h4>
                     <p class="text-xs text-slate-500 mt-1">Comprehensive transit cover</p>
                 </div>
                 <div class="rounded-2xl bg-white p-6 shadow-md text-center">
-                    <div class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-purple-100 text-3xl text-purple-600 shadow-inner"><i class="fas fa-user-check"></i></div>
+                    <div class="mx-auto mb-3 flex h-16 w-16 items-center justify-center rounded-full bg-purple-100 text-3xl text-purple-600 shadow-inner"><i class="fas fa-user-check"></i></div>
                     <h4 class="font-bold text-slate-900">Verified Pros</h4>
                     <p class="text-xs text-slate-500 mt-1">Background checked staff</p>
                 </div>
                 <div class="rounded-2xl bg-white p-6 shadow-md text-center">
-                    <div class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-brand-100 text-3xl text-brand-600 shadow-inner"><i class="fas fa-satellite-dish"></i></div>
+                    <div class="mx-auto mb-3 flex h-16 w-16 items-center justify-center rounded-full bg-brand-100 text-3xl text-brand-600 shadow-inner"><i class="fas fa-satellite-dish"></i></div>
                     <h4 class="font-bold text-slate-900">GPS Tracked</h4>
                     <p class="text-xs text-slate-500 mt-1">Real-time fleet monitoring</p>
                 </div>
@@ -197,10 +244,10 @@
         </div>
     </section>
 
-    <section id="services" class="mx-auto max-w-7xl px-6 py-16 text-center">
+    <section id="services" class="mx-auto max-w-7xl px-6 py-12 text-center">
         <h2 class="mb-4 font-heading text-4xl font-black text-slate-900">Specialized Services</h2>
-        <p class="mb-12 text-lg text-slate-600 max-w-2xl mx-auto">Comprehensive logistics solutions engineered for every requirement.</p>
-        <div class="grid gap-8 md:grid-cols-3">
+        <p class="mb-10 text-lg text-slate-600 max-w-2xl mx-auto">Comprehensive logistics solutions engineered for every requirement.</p>
+        <div class="grid gap-6 md:grid-cols-3">
             <div class="group overflow-hidden rounded-3xl bg-white shadow-lg transition hover:-translate-y-2 text-left">
                 <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=600&q=80" alt="Home Relocation" class="h-48 w-full object-cover">
                 <div class="p-6">
@@ -225,29 +272,29 @@
         </div>
     </section>
 
-    <section class="bg-slate-900 py-20 text-white">
+    <section class="bg-slate-900 py-16 text-white">
         <div class="mx-auto max-w-7xl px-6">
-            <h2 class="mb-16 text-center font-heading text-4xl font-black">Our Flawless Workflow</h2>
+            <h2 class="mb-12 text-center font-heading text-4xl font-black">Our Flawless Workflow</h2>
             <div class="grid gap-8 md:grid-cols-4 relative">
                 <div class="hidden md:block absolute top-12 left-[10%] right-[10%] h-1 border-t-2 border-dashed border-slate-700"></div>
                 
                 <div class="relative z-10 text-center">
-                    <div class="mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-full bg-slate-800 border-4 border-slate-900 text-3xl shadow-[0_0_20px_rgba(239,68,68,0.3)]"><i class="fas fa-clipboard-list text-brand-500"></i></div>
+                    <div class="mx-auto mb-5 flex h-24 w-24 items-center justify-center rounded-full bg-slate-800 border-4 border-slate-900 text-3xl shadow-[0_0_20px_rgba(14,165,233,0.3)]"><i class="fas fa-clipboard-list text-brand-500"></i></div>
                     <h4 class="font-bold text-xl">1. Survey & Quote</h4>
                     <p class="mt-2 text-sm text-slate-400">Digital or physical assessment of inventory to provide a transparent, flat-rate quote.</p>
                 </div>
                 <div class="relative z-10 text-center">
-                    <div class="mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-full bg-slate-800 border-4 border-slate-900 text-3xl shadow-[0_0_20px_rgba(239,68,68,0.3)]"><i class="fas fa-box-open text-brand-500"></i></div>
+                    <div class="mx-auto mb-5 flex h-24 w-24 items-center justify-center rounded-full bg-slate-800 border-4 border-slate-900 text-3xl shadow-[0_0_20px_rgba(14,165,233,0.3)]"><i class="fas fa-box-open text-brand-500"></i></div>
                     <h4 class="font-bold text-xl">2. Premium Packing</h4>
                     <p class="mt-2 text-sm text-slate-400">Our crew arrives with 5-layer materials to dismantle and securely pack your assets.</p>
                 </div>
                 <div class="relative z-10 text-center">
-                    <div class="mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-full bg-slate-800 border-4 border-slate-900 text-3xl shadow-[0_0_20px_rgba(239,68,68,0.3)]"><i class="fas fa-truck-moving text-brand-500"></i></div>
+                    <div class="mx-auto mb-5 flex h-24 w-24 items-center justify-center rounded-full bg-slate-800 border-4 border-slate-900 text-3xl shadow-[0_0_20px_rgba(14,165,233,0.3)]"><i class="fas fa-truck-moving text-brand-500"></i></div>
                     <h4 class="font-bold text-xl">3. Secure Transit</h4>
                     <p class="mt-2 text-sm text-slate-400">Loading into GPS-enabled air-ride trucks for a bump-free, heavily monitored journey.</p>
                 </div>
                 <div class="relative z-10 text-center">
-                    <div class="mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-full bg-slate-800 border-4 border-slate-900 text-3xl shadow-[0_0_20px_rgba(239,68,68,0.3)]"><i class="fas fa-home text-brand-500"></i></div>
+                    <div class="mx-auto mb-5 flex h-24 w-24 items-center justify-center rounded-full bg-slate-800 border-4 border-slate-900 text-3xl shadow-[0_0_20px_rgba(14,165,233,0.3)]"><i class="fas fa-home text-brand-500"></i></div>
                     <h4 class="font-bold text-xl">4. Unload & Setup</h4>
                     <p class="mt-2 text-sm text-slate-400">Safe unloading, unboxing, and reassembly at your new destination.</p>
                 </div>
@@ -255,7 +302,7 @@
         </div>
     </section>
 
-    <section id="tracking" class="mx-auto max-w-7xl px-6 py-16">
+    <section id="tracking" class="mx-auto max-w-7xl px-6 py-12">
         <div class="grid gap-8 lg:grid-cols-2">
             <div class="rounded-3xl bg-brand-600 p-8 text-white shadow-xl md:p-12">
                 <h3 class="mb-2 font-heading text-3xl font-black"><i class="fas fa-map-marked-alt mr-2"></i> Live Tracking</h3>
@@ -267,7 +314,7 @@
                 </form>
             </div>
 
-            <div id="survey" class="rounded-3xl glass-panel p-8 md:p-12">
+            <div id="survey" class="rounded-3xl glass-panel p-8 md:p-12 border border-slate-100">
                 <h3 class="mb-2 font-heading text-3xl font-black text-slate-900">Book Free Survey</h3>
                 <p class="mb-8 text-slate-600">Schedule a video or physical survey for an exact quotation.</p>
                 <form class="grid grid-cols-2 gap-4">
@@ -285,8 +332,8 @@
         </div>
     </section>
 
-    <section class="mx-auto max-w-7xl px-6 py-16 text-center">
-        <h2 class="mb-12 font-heading text-4xl font-black text-slate-900">Our Recent Executions</h2>
+    <section class="mx-auto max-w-7xl px-6 py-12 text-center">
+        <h2 class="mb-10 font-heading text-4xl font-black text-slate-900">Our Recent Executions</h2>
         <div class="grid grid-cols-2 gap-4 md:grid-cols-4">
             <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=400&q=80" alt="Work" class="h-48 w-full rounded-2xl object-cover shadow-sm transition hover:scale-105">
             <img src="https://images.unsplash.com/photo-1587293852726-70cdb56c2866?auto=format&fit=crop&w=400&q=80" alt="Work" class="h-48 w-full rounded-2xl object-cover shadow-sm transition hover:scale-105">
@@ -295,7 +342,7 @@
         </div>
     </section>
 
-    <section class="mx-auto max-w-7xl px-6 pb-16">
+    <section class="mx-auto max-w-7xl px-6 pb-12">
         <div class="rounded-3xl bg-white p-8 shadow-sm border border-slate-100 md:p-12 text-slate-600 text-justify">
             <h2 class="mb-6 font-heading text-2xl font-bold text-slate-900">The Ultimate Choice for Packers and Movers in Vadodara and Across India</h2>
             <p class="mb-4">
@@ -310,7 +357,7 @@
         </div>
     </section>
 
-    <section id="faq" class="mx-auto max-w-7xl px-6 py-16 pt-0">
+    <section id="faq" class="mx-auto max-w-7xl px-6 py-12 pt-0">
         <div class="grid gap-12 lg:grid-cols-2">
             
             <div>
@@ -333,14 +380,14 @@
             <div>
                 <h2 class="mb-6 font-heading text-3xl font-black text-slate-900">Frequently Asked</h2>
                 <div class="space-y-4 mb-8">
-                    <details class="group rounded-2xl bg-white p-6 shadow-sm [&_summary::-webkit-details-marker]:hidden">
+                    <details class="group rounded-2xl bg-white p-6 shadow-sm border border-slate-100 [&_summary::-webkit-details-marker]:hidden">
                         <summary class="flex cursor-pointer items-center justify-between font-bold text-slate-900">
                             Is packing material cost included?
                             <span class="transition group-open:rotate-180"><i class="fas fa-chevron-down text-brand-500"></i></span>
                         </summary>
                         <p class="mt-4 text-sm text-slate-600">Yes, our quotes are all-inclusive. All boxes, bubble wrap, stretch film, and packing tapes are included in the price.</p>
                     </details>
-                    <details class="group rounded-2xl bg-white p-6 shadow-sm [&_summary::-webkit-details-marker]:hidden">
+                    <details class="group rounded-2xl bg-white p-6 shadow-sm border border-slate-100 [&_summary::-webkit-details-marker]:hidden">
                         <summary class="flex cursor-pointer items-center justify-between font-bold text-slate-900">
                             How early should I book my move?
                             <span class="transition group-open:rotate-180"><i class="fas fa-chevron-down text-brand-500"></i></span>
@@ -349,7 +396,7 @@
                     </details>
                 </div>
 
-                <div class="rounded-2xl glass-panel p-6">
+                <div class="rounded-2xl glass-panel p-6 border border-slate-100">
                     <h4 class="mb-4 font-bold text-slate-900">Have another question?</h4>
                     <div class="flex gap-2">
                         <input type="text" placeholder="Type your question..." class="w-full rounded-xl border border-slate-200 bg-white/80 px-4 py-2 outline-none focus:border-brand-500">
@@ -361,7 +408,7 @@
         </div>
     </section>
 
-    <footer class="mt-12 rounded-t-[3rem] bg-slate-900 px-6 pb-8 pt-16 text-slate-300 shadow-2xl">
+    <footer class="mt-8 rounded-t-[3rem] bg-slate-900 px-6 pb-8 pt-12 text-slate-300 shadow-2xl">
         <div class="mx-auto max-w-7xl">
             <div class="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
                 
@@ -394,7 +441,7 @@
 
                 <div class="lg:col-span-2 overflow-hidden rounded-2xl">
                     <iframe 
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d118106.70010221669!2d73.10304625!3d22.32210265!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395fc8ab91a3ddab%3A0xac39d3bfe1473fb8!2sVadodara%2C%20Gujarat!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d118106.71521729606!2d73.17308625!3d22.3220425!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395fc8ab91a3ddab%3A0xac39d3bfe1473fb8!2sVadodara%2C%20Gujarat!5e0!3m2!1sen!2sin!4v1714000000000!5m2!1sen!2sin" 
                         width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
                     </iframe>
                 </div>
@@ -436,7 +483,16 @@
             }, 2000);
         });
 
-        // Folding Nav Logic
+        // Hero Background Slider Logic
+        const bgSlides = document.querySelectorAll('.hero-bg-slide');
+        let currentSlide = 0;
+        setInterval(() => {
+            bgSlides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % bgSlides.length;
+            bgSlides[currentSlide].classList.add('active');
+        }, 2000);
+
+        // Folding Nav & Mobile Side Menu Logic
         const nav = document.getElementById('main-nav');
         const navLinks = document.getElementById('nav-links');
         const navBtn = document.getElementById('nav-btn');
@@ -458,18 +514,39 @@
         });
 
         function toggleNav() {
-            if (nav.classList.contains('nav-folded')) {
-                // User clicks to expand
-                navIsManuallyExpanded = true;
-                nav.classList.remove('nav-folded');
-                navLinks.classList.remove('nav-hidden-items');
-                navBtn.classList.remove('nav-hidden-items');
-            } else if (window.scrollY > 50) {
-                // User clicks to close (only if scrolled down)
-                navIsManuallyExpanded = false;
-                nav.classList.add('nav-folded');
-                navLinks.classList.add('nav-hidden-items');
-                navBtn.classList.add('nav-hidden-items');
+            if (window.innerWidth < 768) {
+                // Mobile behavior: toggle side menu
+                const sideMenu = document.getElementById('mobile-side-menu');
+                const overlay = document.getElementById('mobile-overlay');
+                
+                if (sideMenu.classList.contains('translate-x-full')) {
+                    // Open Menu
+                    overlay.classList.remove('hidden');
+                    setTimeout(() => {
+                        overlay.classList.remove('opacity-0');
+                        sideMenu.classList.remove('translate-x-full');
+                    }, 10);
+                } else {
+                    // Close Menu
+                    sideMenu.classList.add('translate-x-full');
+                    overlay.classList.add('opacity-0');
+                    setTimeout(() => {
+                        overlay.classList.add('hidden');
+                    }, 300);
+                }
+            } else {
+                // Desktop behavior: expand folding navbar
+                if (nav.classList.contains('nav-folded')) {
+                    navIsManuallyExpanded = true;
+                    nav.classList.remove('nav-folded');
+                    navLinks.classList.remove('nav-hidden-items');
+                    navBtn.classList.remove('nav-hidden-items');
+                } else if (window.scrollY > 50) {
+                    navIsManuallyExpanded = false;
+                    nav.classList.add('nav-folded');
+                    navLinks.classList.add('nav-hidden-items');
+                    navBtn.classList.add('nav-hidden-items');
+                }
             }
         }
 

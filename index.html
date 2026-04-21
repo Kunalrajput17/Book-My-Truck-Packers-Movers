@@ -13,7 +13,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script> <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
     <script src="https://unpkg.com/@studio-freight/lenis@1.0.39/dist/lenis.min.js"></script>
@@ -49,13 +50,13 @@
         .blob-2 { bottom: -10%; right: -10%; width: 40vw; height: 40vw; background: #dbeafe; animation-direction: alternate-reverse; }
         @keyframes float { to { transform: translate(10%, 10%) scale(1.1); } }
         
-        /* True Glassmorphism (FIXED: Invalid CSS syntax removed) */
+        /* True Glassmorphism */
         .glass-panel { background: rgba(255, 255, 255, 0.65); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.5); box-shadow: 0 8px 32px 0 rgba(31,38,135,0.07); }
         .hero-glass { background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(24px); border: 1px solid rgba(255,255,255,0.2); box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37); }
         .hide-scrollbar::-webkit-scrollbar { display: none; }
         
-        /* Navbar Folding Transitions */
-        #main-nav { transition: max-width 0.7s cubic-bezier(0.4, 0, 0.2, 1), padding 0.7s ease; white-space: nowrap; overflow: hidden; max-width: 1400px; }
+        /* Navbar Folding Transitions (Fixed top positioning) */
+        #main-nav { transition: max-width 0.7s cubic-bezier(0.4, 0, 0.2, 1), padding 0.7s ease, top 0.4s ease; white-space: nowrap; overflow: hidden; max-width: 1400px; }
         .nav-folded { max-width: 275px !important; padding-right: 24px !important; }
         .nav-hidden-items { opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
 
@@ -63,18 +64,18 @@
         .magnetic-btn { display: inline-block; will-change: transform; cursor: pointer; }
     </style>
 </head>
-<body class="font-sans text-slate-700 antialiased overflow-x-hidden pb-20 relative">
+<body class="font-sans text-slate-700 antialiased pb-20 relative" style="overflow-x: clip;">
 
     <div class="ambient-bg"><div class="blob blob-1"></div><div class="blob blob-2"></div></div>
 
     <div class="absolute top-0 left-0 w-full h-[115vh] lg:h-[100vh] z-[-1] overflow-hidden bg-slate-900">
-        <lottie-player src="https://lottie.host/8b515ece-2820-4e39-9ed1-24ff9671d187/wE8IINr6gB.json" background="transparent" speed="0.8" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.6;" loop autoplay></lottie-player>
+        <lottie-player src="https://assets2.lottiefiles.com/packages/lf20_svy4ivvy.json" background="transparent" speed="1" style="width: 100%; height: 100%; opacity: 0.6;" loop autoplay preserveAspectRatio="xMidYMid slice"></lottie-player>
         <div class="absolute inset-0 bg-brand-900/60 mix-blend-multiply"></div>
         <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent"></div>
     </div>
 
-    <div id="quote-popup" class="fixed inset-0 z-[120] hidden items-center justify-center bg-slate-900/60 p-4 backdrop-blur-sm transition-opacity">
-        <div class="relative w-full max-w-md max-h-[90vh] overflow-y-auto rounded-3xl bg-white p-8 shadow-2xl">
+    <div id="quote-popup" class="fixed inset-0 z-[120] flex items-center justify-center bg-slate-900/60 p-4 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-500">
+        <div id="quote-popup-box" class="relative w-full max-w-md max-h-[90vh] overflow-y-auto rounded-3xl bg-white p-8 shadow-2xl transform scale-95 transition-transform duration-500">
             <button onclick="closePopup()" class="absolute right-4 top-4 text-slate-400 transition-all duration-300 hover:rotate-90 hover:scale-125 hover:text-brand-600 active:scale-90"><i class="fas fa-times text-xl"></i></button>
             <h3 class="mb-2 font-heading text-2xl font-bold text-slate-900">Get an Instant Quote</h3>
             <p class="mb-6 text-sm text-slate-500">Lock in a 10% discount by generating your quote right now!</p>
@@ -96,7 +97,7 @@
         </div>
     </div>
 
-    <nav id="main-nav" class="sticky top-2 z-40 ml-[2%] mt-2 flex w-[96%] items-center justify-between overflow-hidden rounded-full glass-panel px-6 py-3 border border-brand-200 shadow-[0_0_20px_rgba(14,165,233,0.35)] md:ml-[5%] md:w-[90%]">
+    <nav id="main-nav" class="fixed top-[48px] z-[60] ml-[2%] flex w-[96%] items-center justify-between overflow-hidden rounded-full glass-panel px-6 py-3 border border-brand-200 shadow-[0_0_20px_rgba(14,165,233,0.35)] md:ml-[5%] md:w-[90%]">
         <div onclick="toggleNav()" class="flex items-center gap-3 cursor-pointer transition hover:opacity-80 group" title="Click to open menu">
             <div class="font-heading text-2xl font-black tracking-tight text-slate-900">
                 BOOK MY<span class="text-brand-600">TRUCK</span><span class="text-base lowercase font-bold text-slate-500 tracking-normal">.com</span>
@@ -130,7 +131,7 @@
         </div>
     </div>
 
-    <header class="relative z-10 mx-auto flex w-full min-h-[85vh] max-w-7xl flex-col items-center justify-between px-6 pb-12 pt-12 lg:flex-row">
+    <header class="relative z-10 mx-auto flex w-full min-h-[85vh] max-w-7xl flex-col items-center justify-between px-6 pb-12 pt-32 lg:flex-row">
         <div class="w-full text-center lg:w-1/2 lg:text-left" data-aos="fade-right">
             <div class="mb-6 inline-block rounded-full border border-brand-300/30 bg-white/10 backdrop-blur-md px-4 py-1.5 font-bold text-white shadow-lg">
                 <i class="fas fa-shield-alt mr-2 text-brand-300"></i> India's #1 Logistics Partner
@@ -304,7 +305,7 @@
         </div>
     </section>
 
-    <section id="tracking" class="mx-auto max-w-7xl px-6 py-12">
+    <section id="tracking" class="mx-auto max-w-7xl px-6 py-12 overflow-hidden">
         <div class="grid gap-8 lg:grid-cols-2">
             
             <div class="rounded-3xl bg-slate-900 p-8 text-white shadow-xl md:p-12 relative overflow-hidden" data-aos="fade-right">
@@ -359,7 +360,7 @@
         </div>
     </section>
 
-    <section class="mx-auto max-w-7xl px-6 py-12 text-center" data-aos="fade-up">
+    <section class="mx-auto max-w-7xl px-6 py-12 text-center overflow-hidden" data-aos="fade-up">
         <h2 class="mb-10 font-heading text-4xl font-black text-slate-900">Our Recent Executions</h2>
         <div class="grid grid-cols-2 gap-4 md:grid-cols-4">
             <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=400&q=80" alt="Work" class="h-48 w-full rounded-2xl object-cover shadow-md transition-transform duration-300 hover:scale-105 hover:shadow-xl cursor-pointer">
@@ -369,7 +370,7 @@
         </div>
     </section>
 
-    <section class="mx-auto max-w-7xl px-6 pb-12" data-aos="fade-up">
+    <section class="mx-auto max-w-7xl px-6 pb-12 overflow-hidden" data-aos="fade-up">
         <div class="rounded-3xl bg-white p-8 shadow-sm border border-slate-100 md:p-12 text-slate-600 text-justify">
             <h2 class="mb-6 font-heading text-2xl font-bold text-slate-900">The Ultimate Choice for Packers and Movers in Vadodara and Across India</h2>
             <p class="mb-4">
@@ -384,7 +385,7 @@
         </div>
     </section>
 
-    <section id="faq" class="mx-auto max-w-7xl px-6 py-12 pt-0">
+    <section id="faq" class="mx-auto max-w-7xl px-6 py-12 pt-0 overflow-hidden">
         <div class="grid gap-12 lg:grid-cols-2">
             <div data-aos="fade-right">
                 <h2 class="mb-6 font-heading text-3xl font-black text-slate-900">Why People Trust Us</h2>
@@ -510,24 +511,26 @@
         // 2. Initialize AOS (Animate on Scroll)
         AOS.init({
             duration: 800,
-            offset: 100,
+            offset: 50,
             once: true, 
             easing: 'ease-out-cubic'
         });
 
-        // 3. Magnetic Button Hover Effect (GSAP)
-        const magneticBtns = document.querySelectorAll('.magnetic-btn');
-        magneticBtns.forEach((btn) => {
-            btn.addEventListener('mousemove', (e) => {
-                const rect = btn.getBoundingClientRect();
-                const x = (e.clientX - rect.left - rect.width / 2) * 0.4;
-                const y = (e.clientY - rect.top - rect.height / 2) * 0.4;
-                gsap.to(btn, { x: x, y: y, duration: 0.3, ease: "power2.out" });
+        // 3. Magnetic Button Hover Effect (GSAP) - Only run on desktop to prevent mobile touch glitches
+        if(window.innerWidth > 768) {
+            const magneticBtns = document.querySelectorAll('.magnetic-btn');
+            magneticBtns.forEach((btn) => {
+                btn.addEventListener('mousemove', (e) => {
+                    const rect = btn.getBoundingClientRect();
+                    const x = (e.clientX - rect.left - rect.width / 2) * 0.4;
+                    const y = (e.clientY - rect.top - rect.height / 2) * 0.4;
+                    gsap.to(btn, { x: x, y: y, duration: 0.3, ease: "power2.out" });
+                });
+                btn.addEventListener('mouseleave', () => {
+                    gsap.to(btn, { x: 0, y: 0, duration: 0.7, ease: "elastic.out(1, 0.3)" });
+                });
             });
-            btn.addEventListener('mouseleave', () => {
-                gsap.to(btn, { x: 0, y: 0, duration: 0.7, ease: "elastic.out(1, 0.3)" });
-            });
-        });
+        }
 
         // 4. Interactive Visual Stepper Logic
         function simulateTracking(e) {
@@ -545,6 +548,7 @@
                 setTimeout(() => { bar.style.width = '50%'; }, 200);
             }});
         }
+        
         function resetTracking() {
             const form = document.getElementById('tracking-form');
             const stepper = document.getElementById('tracking-stepper');
@@ -560,13 +564,32 @@
 
         // 5. Popup Form Logic
         function closePopup() {
-            document.getElementById('quote-popup').classList.add('hidden');
-            document.getElementById('quote-popup').classList.remove('flex');
+            const popupBox = document.getElementById('quote-popup-box');
+            const popupWrapper = document.getElementById('quote-popup');
+            
+            popupBox.classList.remove('scale-100');
+            popupBox.classList.add('scale-95');
+            popupWrapper.classList.remove('opacity-100');
+            popupWrapper.classList.add('opacity-0');
+            
+            setTimeout(() => {
+                popupWrapper.classList.add('pointer-events-none', 'hidden');
+            }, 500);
         }
+        
         window.addEventListener('load', () => {
             setTimeout(() => {
-                document.getElementById('quote-popup').classList.remove('hidden');
-                document.getElementById('quote-popup').classList.add('flex');
+                const popupBox = document.getElementById('quote-popup-box');
+                const popupWrapper = document.getElementById('quote-popup');
+                
+                popupWrapper.classList.remove('hidden');
+                // Allow CSS transition to kick in by using a small timeout
+                setTimeout(() => {
+                    popupWrapper.classList.remove('pointer-events-none');
+                    popupWrapper.classList.add('opacity-100');
+                    popupBox.classList.remove('scale-95');
+                    popupBox.classList.add('scale-100');
+                }, 50);
             }, 2500);
         });
 
@@ -592,29 +615,31 @@
 
         function toggleNav() {
             if (window.innerWidth < 768) {
-                // Mobile behavior
+                // Mobile behavior (Pure CSS transitions, no display toggles)
                 const sideMenu = document.getElementById('mobile-side-menu');
                 const overlay = document.getElementById('mobile-overlay');
                 
                 if (sideMenu.classList.contains('translate-x-full')) {
-                    // Open
+                    // Open Menu
                     overlay.classList.remove('hidden');
-                    hamburgerIcon.classList.remove('fa-bars');
-                    hamburgerIcon.classList.add('fa-times', 'rotate-90');
                     setTimeout(() => {
+                        overlay.classList.remove('pointer-events-none');
                         overlay.classList.remove('opacity-0');
                         sideMenu.classList.remove('translate-x-full');
+                        hamburgerIcon.classList.remove('fa-bars');
+                        hamburgerIcon.classList.add('fa-times', 'rotate-90');
                     }, 10);
                 } else {
-                    // Close
-                    sideMenu.classList.add('translate-x-full');
+                    // Close Menu
+                    overlay.classList.add('pointer-events-none');
                     overlay.classList.add('opacity-0');
+                    sideMenu.classList.add('translate-x-full');
                     hamburgerIcon.classList.add('fa-bars');
                     hamburgerIcon.classList.remove('fa-times', 'rotate-90');
                     setTimeout(() => { overlay.classList.add('hidden'); }, 300);
                 }
             } else {
-                // Desktop behavior
+                // Desktop behavior: expand folding navbar
                 if (nav.classList.contains('nav-folded')) {
                     navIsManuallyExpanded = true;
                     nav.classList.remove('nav-folded');

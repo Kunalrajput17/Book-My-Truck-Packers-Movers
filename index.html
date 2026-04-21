@@ -52,7 +52,6 @@
         .hero-bg-slide { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0; transition: opacity 1s ease-in-out; }
         .hero-bg-slide.active { opacity: 1; }
         
-        /* Smooth Icon Morphing Transitions */
         .scroll-icon { transition: opacity 0.4s ease, transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); position: absolute; }
     </style>
 </head>
@@ -174,72 +173,71 @@
         </div>
     </div>
 
-    <section id="services" class="relative mx-auto w-full max-w-7xl px-6 py-24 min-h-[2500px]">
+    <div class="text-center mt-24 mb-12 relative z-10 px-6">
+        <h2 class="mb-4 font-heading text-5xl font-black text-slate-900">Specialized Services</h2>
+        <p class="text-lg text-slate-600 max-w-2xl mx-auto">Comprehensive logistics solutions engineered for every requirement.</p>
+    </div>
+
+    <section id="services" class="relative mx-auto w-full max-w-7xl h-[2800px] md:h-[4000px]">
         
         <svg class="absolute top-0 left-0 w-full h-full z-0 pointer-events-none" preserveAspectRatio="none" viewBox="0 0 100 1000">
-            <path d="M 50,0 C 50,50 25,50 25,125 C 25,250 75,250 75,375 C 75,500 25,500 25,625 C 25,750 75,750 75,875 C 75,950 50,950 50,1000" fill="none" stroke="rgba(14,165,233,0.4)" stroke-width="4" filter="blur(8px)" vector-effect="non-scaling-stroke"/>
-            <path id="scroll-path" d="M 50,0 C 50,50 25,50 25,125 C 25,250 75,250 75,375 C 75,500 25,500 25,625 C 25,750 75,750 75,875 C 75,950 50,950 50,1000" fill="none" stroke="#0ea5e9" stroke-width="2" vector-effect="non-scaling-stroke"/>
+            <path d="M 50,0 C 50,60 15,60 15,125 C 15,210 85,290 85,375 C 85,460 15,540 15,625 C 15,710 85,790 85,875 C 85,940 50,940 50,1000" fill="none" stroke="rgba(14,165,233,0.4)" stroke-width="4" filter="blur(8px)" vector-effect="non-scaling-stroke"/>
+            <path id="scroll-path" d="M 50,0 C 50,60 15,60 15,125 C 15,210 85,290 85,375 C 85,460 15,540 15,625 C 15,710 85,790 85,875 C 85,940 50,940 50,1000" fill="none" stroke="#0ea5e9" stroke-width="2" vector-effect="non-scaling-stroke"/>
         </svg>
 
-        <div class="text-center mb-24 relative z-10">
-            <h2 class="mb-4 font-heading text-5xl font-black text-slate-900">Specialized Services</h2>
-            <p class="text-lg text-slate-600 max-w-2xl mx-auto">Comprehensive logistics solutions engineered for every requirement.</p>
+        <div id="floating-icon-box" class="absolute z-30 opacity-0 transition-opacity duration-300 flex h-16 w-16 md:h-28 md:w-28 items-center justify-center rounded-full bg-white/95 backdrop-blur shadow-[0_0_40px_rgba(14,165,233,0.6)] border-4 border-brand-100" style="transform: translate(-50%, -50%); pointer-events: none;">
+            <i id="icon-house" class="scroll-icon fas fa-boxes text-3xl md:text-5xl text-brand-600 opacity-100 scale-100"></i>
+            <i id="icon-corp" class="scroll-icon fas fa-server text-2xl md:text-4xl text-brand-600 opacity-0 scale-50"></i>
+            <i id="icon-veh" class="scroll-icon fas fa-car-side text-3xl md:text-5xl text-brand-600 opacity-0 scale-50"></i>
+            <i id="icon-ware" class="scroll-icon fas fa-warehouse text-2xl md:text-4xl text-brand-600 opacity-0 scale-50"></i>
         </div>
 
-        <div id="floating-icon-box" class="absolute z-30 opacity-0 transition-opacity duration-300 flex h-16 w-16 md:h-32 md:w-32 items-center justify-center rounded-full bg-white/95 backdrop-blur shadow-[0_0_40px_rgba(14,165,233,0.5)] border-4 border-brand-100" style="transform: translate(-50%, -50%); pointer-events: none;">
-            <i id="icon-house" class="scroll-icon fas fa-boxes text-3xl md:text-6xl text-brand-600 opacity-100 scale-100"></i>
-            <i id="icon-corp" class="scroll-icon fas fa-server text-2xl md:text-5xl text-brand-600 opacity-0 scale-50"></i>
-            <i id="icon-veh" class="scroll-icon fas fa-car-side text-3xl md:text-6xl text-brand-600 opacity-0 scale-50"></i>
-            <i id="icon-ware" class="scroll-icon fas fa-warehouse text-2xl md:text-5xl text-brand-600 opacity-0 scale-50"></i>
-        </div>
-
-        <div class="service-row relative flex w-full justify-end mb-48 z-10" data-target-icon="icon-house">
-            <div class="w-[65%] sm:w-[60%] md:w-[42%] lg:w-[38%]">
-                <div class="rounded-3xl bg-white/95 backdrop-blur p-5 md:p-8 shadow-xl border border-slate-100 transition hover:-translate-y-2">
-                    <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=600&q=80" alt="Home Relocation" class="h-36 md:h-64 w-full rounded-2xl object-cover mb-4 md:mb-6">
-                    <h4 class="font-heading text-xl md:text-3xl font-black text-slate-900 mb-2 md:mb-4">Household Relocation</h4>
-                    <p class="text-xs md:text-lg text-slate-600 mb-4 md:mb-8">Multi-layer export quality packing for furniture, glass, and electronics to ensure safe transition.</p>
-                    <a href="service-detail.html?service=household" class="block w-full rounded-xl bg-slate-900 py-3 md:py-4 text-center font-heading font-bold text-white shadow-md transition hover:bg-brand-600">Book Now</a>
+        <div class="absolute top-0 left-0 w-full h-[25%] flex items-center px-6 md:px-12 z-10 service-row" data-target-icon="icon-house">
+            <div class="w-[70%] md:w-[42%] ml-auto">
+                <div class="rounded-3xl bg-white/95 backdrop-blur p-5 md:p-8 shadow-2xl border border-slate-100 transition hover:-translate-y-2">
+                    <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=600&q=80" alt="Home Relocation" class="h-32 md:h-56 w-full rounded-2xl object-cover mb-4">
+                    <h4 class="font-heading text-xl md:text-3xl font-black text-slate-900 mb-2">Household Relocation</h4>
+                    <p class="text-xs md:text-base text-slate-600 mb-4 md:mb-6">Multi-layer export quality packing for furniture, glass, and electronics to ensure safe transition.</p>
+                    <a href="service-detail.html?service=household" class="block w-full rounded-xl bg-slate-900 py-3 text-center font-heading font-bold text-white shadow-md transition hover:bg-brand-600">Book Now</a>
                 </div>
             </div>
         </div>
 
-        <div class="service-row relative flex w-full justify-start mb-48 z-10" data-target-icon="icon-corp">
-            <div class="w-[65%] sm:w-[60%] md:w-[42%] lg:w-[38%]">
-                <div class="rounded-3xl bg-white/95 backdrop-blur p-5 md:p-8 shadow-xl border border-slate-100 transition hover:-translate-y-2">
-                    <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80" alt="Office Shifting" class="h-36 md:h-64 w-full rounded-2xl object-cover mb-4 md:mb-6">
-                    <h4 class="font-heading text-xl md:text-3xl font-black text-slate-900 mb-2 md:mb-4">Corporate & IT Shifting</h4>
-                    <p class="text-xs md:text-lg text-slate-600 mb-4 md:mb-8">Zero-downtime office transitions with specialized server handling and secure document transport.</p>
-                    <a href="service-detail.html?service=corporate" class="block w-full rounded-xl bg-slate-900 py-3 md:py-4 text-center font-heading font-bold text-white shadow-md transition hover:bg-brand-600">Book Now</a>
+        <div class="absolute top-[25%] left-0 w-full h-[25%] flex items-center px-6 md:px-12 z-10 service-row" data-target-icon="icon-corp">
+            <div class="w-[70%] md:w-[42%] mr-auto">
+                <div class="rounded-3xl bg-white/95 backdrop-blur p-5 md:p-8 shadow-2xl border border-slate-100 transition hover:-translate-y-2">
+                    <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80" alt="Office Shifting" class="h-32 md:h-56 w-full rounded-2xl object-cover mb-4">
+                    <h4 class="font-heading text-xl md:text-3xl font-black text-slate-900 mb-2">Corporate & IT Shifting</h4>
+                    <p class="text-xs md:text-base text-slate-600 mb-4 md:mb-6">Zero-downtime office transitions with specialized server handling and secure document transport.</p>
+                    <a href="service-detail.html?service=corporate" class="block w-full rounded-xl bg-slate-900 py-3 text-center font-heading font-bold text-white shadow-md transition hover:bg-brand-600">Book Now</a>
                 </div>
             </div>
         </div>
 
-        <div class="service-row relative flex w-full justify-end mb-48 z-10" data-target-icon="icon-veh">
-            <div class="w-[65%] sm:w-[60%] md:w-[42%] lg:w-[38%]">
-                <div class="rounded-3xl bg-white/95 backdrop-blur p-5 md:p-8 shadow-xl border border-slate-100 transition hover:-translate-y-2">
-                    <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=600&q=80" alt="Car Transport" class="h-36 md:h-64 w-full rounded-2xl object-cover mb-4 md:mb-6">
-                    <h4 class="font-heading text-xl md:text-3xl font-black text-slate-900 mb-2 md:mb-4">Vehicle Transport</h4>
-                    <p class="text-xs md:text-lg text-slate-600 mb-4 md:mb-8">Dedicated enclosed containers for cars and bikes, complete with locking mechanisms and wheel chocks.</p>
-                    <a href="service-detail.html?service=vehicle" class="block w-full rounded-xl bg-slate-900 py-3 md:py-4 text-center font-heading font-bold text-white shadow-md transition hover:bg-brand-600">Book Now</a>
+        <div class="absolute top-[50%] left-0 w-full h-[25%] flex items-center px-6 md:px-12 z-10 service-row" data-target-icon="icon-veh">
+            <div class="w-[70%] md:w-[42%] ml-auto">
+                <div class="rounded-3xl bg-white/95 backdrop-blur p-5 md:p-8 shadow-2xl border border-slate-100 transition hover:-translate-y-2">
+                    <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=600&q=80" alt="Car Transport" class="h-32 md:h-56 w-full rounded-2xl object-cover mb-4">
+                    <h4 class="font-heading text-xl md:text-3xl font-black text-slate-900 mb-2">Vehicle Transport</h4>
+                    <p class="text-xs md:text-base text-slate-600 mb-4 md:mb-6">Dedicated enclosed containers for cars and bikes, complete with locking mechanisms and wheel chocks.</p>
+                    <a href="service-detail.html?service=vehicle" class="block w-full rounded-xl bg-slate-900 py-3 text-center font-heading font-bold text-white shadow-md transition hover:bg-brand-600">Book Now</a>
                 </div>
             </div>
         </div>
 
-        <div class="service-row relative flex w-full justify-start z-10" data-target-icon="icon-ware">
-            <div class="w-[65%] sm:w-[60%] md:w-[42%] lg:w-[38%]">
-                <div class="rounded-3xl bg-white/95 backdrop-blur p-5 md:p-8 shadow-xl border border-slate-100 transition hover:-translate-y-2">
-                    <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=600&q=80" alt="Warehouse Storage" class="h-36 md:h-64 w-full rounded-2xl object-cover mb-4 md:mb-6">
-                    <h4 class="font-heading text-xl md:text-3xl font-black text-slate-900 mb-2 md:mb-4">Warehousing Service</h4>
-                    <p class="text-xs md:text-lg text-slate-600 mb-4 md:mb-8">Secure, 24/7 monitored, and climate-controlled storage facilities for short and long-term storage needs.</p>
-                    <a href="service-detail.html?service=warehouse" class="block w-full rounded-xl bg-slate-900 py-3 md:py-4 text-center font-heading font-bold text-white shadow-md transition hover:bg-brand-600">Book Now</a>
+        <div class="absolute top-[75%] left-0 w-full h-[25%] flex items-center px-6 md:px-12 z-10 service-row" data-target-icon="icon-ware">
+            <div class="w-[70%] md:w-[42%] mr-auto">
+                <div class="rounded-3xl bg-white/95 backdrop-blur p-5 md:p-8 shadow-2xl border border-slate-100 transition hover:-translate-y-2">
+                    <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=600&q=80" alt="Warehouse Storage" class="h-32 md:h-56 w-full rounded-2xl object-cover mb-4">
+                    <h4 class="font-heading text-xl md:text-3xl font-black text-slate-900 mb-2">Warehousing Service</h4>
+                    <p class="text-xs md:text-base text-slate-600 mb-4 md:mb-6">Secure, 24/7 monitored, and climate-controlled storage facilities for short and long-term storage needs.</p>
+                    <a href="service-detail.html?service=warehouse" class="block w-full rounded-xl bg-slate-900 py-3 text-center font-heading font-bold text-white shadow-md transition hover:bg-brand-600">Book Now</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <div class="relative mt-24">
-        
+    <div class="relative">
         <div class="absolute top-0 left-1/2 flex h-24 w-24 md:h-28 md:w-28 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-[6px] md:border-8 border-slate-900 bg-white text-4xl md:text-5xl text-brand-600 shadow-xl z-50">
             <i class="fas fa-people-carry animate-float-slow"></i>
         </div>
@@ -461,7 +459,7 @@
                         India's premier logistics platform. We deliver your assets, memories, and infrastructure with zero friction and absolute safety.
                     </p>
                     <div class="mt-4 inline-block rounded-full bg-slate-800 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-brand-400 border border-slate-700">
-                        A Unit of Prime Safe Packers & Movers
+                        A Unit of Pioneer Logistics
                     </div>
                 </div>
 
@@ -513,7 +511,7 @@
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             
-            // 1. STATS COUNTER LOGIC (Rewritten for smooth counting)
+            // 1. STATS COUNTER LOGIC
             const counters = document.querySelectorAll('.counter');
             const animateCounters = (entries, observer) => {
                 entries.forEach(entry => {
@@ -522,7 +520,6 @@
                         const target = +counter.getAttribute('data-target');
                         let count = 0;
                         const updateCount = () => {
-                            // Calculate increment dynamically based on target size to finish in ~1.5 seconds (approx 90 frames)
                             const inc = Math.max(1, Math.ceil(target / 90)); 
                             count += inc;
                             if (count < target) {
@@ -541,13 +538,12 @@
             counters.forEach(counter => counterObserver.observe(counter));
 
 
-            // 2. SNAKE REFORM (SCROLLYTELLING) LOGIC (Now enabled on Mobile)
+            // 2. SNAKE REFORM (SCROLLYTELLING) LOGIC
             const path = document.getElementById('scroll-path');
             const iconBox = document.getElementById('floating-icon-box');
             const servicesSection = document.getElementById('services');
             const icons = document.querySelectorAll('.scroll-icon');
             
-            // Icon Morphing Observer (triggers icon crossfades)
             const snakeObserverOptions = { root: null, rootMargin: '-40% 0px -40% 0px', threshold: 0 };
             const snakeObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -567,7 +563,6 @@
             }, snakeObserverOptions);
             document.querySelectorAll('.service-row').forEach(row => snakeObserver.observe(row));
 
-            // Curvy Path Tracking Logic
             if(path && iconBox && servicesSection) {
                 const pathLength = path.getTotalLength();
                 
@@ -584,12 +579,11 @@
                         iconBox.style.position = 'fixed';
                         iconBox.style.top = '50%';
                         
-                        const targetY = progress * 1000; // viewBox height is 1000
+                        const targetY = progress * 1000; 
                         let start = 0;
                         let end = pathLength;
                         let point;
                         
-                        // Binary search to find X on the curvy path for a given Y
                         for (let i = 0; i < 20; i++) {
                             const mid = (start + end) / 2;
                             point = path.getPointAtLength(mid);
